@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/styles/index.css" />
+    <link rel="stylesheet" href="/styles/sidebar.css">
+  </head>
+  <body>
+<section class="hero" id="home">
+      <header>
+      <div class="logo">
+        <div class="logo-icon">☕</div>
+        <div class="logo-text">Coffee</div>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <!-- <li><a href="#gallery">Gallery</a></li> -->
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <div class="content">
+        <div class="tagline">Best Coffee</div>
+        <h1>Make your day great with our special coffee!</h1>
+        <p>
+          Welcome to our coffee paradise, where every bean tells a story and
+          every cup sparks joy.
+        </p>
+        <div class="btn-group">
+          <a href="#" class="btn btn-primary">Order Now</a>
+          <a href="#contact" class="btn btn-secondary">Contact Us</a>
+        </div>
+      </div>
+
+      <div class="image-container">
+       
+    </main>
+
+    <footer>© 2025 Brew Café. All rights reserved.</footer>
+</section>
+  
+
+
+     <!-- About Section -->
+    <section class="about" id="about">
+      <div class="section-title">
+        <h2>About Us</h2>
+      </div>
+      <div class="about-content">
+        <div class="about-text">
+          <h3>Our Story</h3>
+          <p>
+            We started our journey in 2010 with a simple mission: to serve the
+            best coffee in town. Using only premium beans sourced directly from
+            farmers, we craft each cup with precision and care.
+          </p>
+          <p>
+            Our cozy atmosphere and friendly baristas have made us a local
+            favorite. Whether you're looking for your daily caffeine fix or a
+            place to relax, we've got you covered.
+          </p>
+        </div>
+        <div class="about-image"></div>
+      </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="section menu" id="menu">
+      <div class="section-title">
+        <h2>Our Menu</h2>
+      </div>
+      <div class="menu-grid">
+        <!-- <div class="menu-item">
+          <div class="menu-img"><img src="/image/espresso.jpg" ></div>
+          <div class="menu-details">
+            <h3>Espresso</h3>
+            <p>Rich and bold single shot of coffee</p>
+            <div class="price">$3.50</div>
+          </div>
+        </div> -->
+        <div class="menu-item" onclick="openSidebar('espresso', '/image/espresso.jpg', 'Espresso', 'Rich and bold single shot of coffee', '$3.50')">
+        <div class="menu-img">
+            <img id="im" src="/image/espresso.jpg" alt="Espresso">
+        </div>
+        <div class="menu-details">
+            <h3>Espresso</h3>
+            <p>Rich and bold single shot of coffee</p>
+            <div class="price">$3.50</div>
+        </div>
+    </div>
+        <div class="menu-item" onclick="openSidebar('Cappuccino', '/image/cappuccino.jpg', 'Cappuccino', 'Espresso with steamed milk and foam', '$4.50')">
+          
+          <div class="menu-img"><img src="/image/cappuccino.jpg" ></div>
+          <div class="menu-details">
+            <h3>Cappuccino</h3>
+            <p>Espresso with steamed milk and foam</p>
+            <div class="price">$4.50</div>
+          </div>
+        </div>
+        <div class="menu-item" onclick="openSidebar('Latte', '/image/latte.jpg', 'Latte', 'Espresso with steamed milk and light foam', '$5.00')">
+          <div class="menu-img"><img src="/image/latte.jpg" ></div>
+          <div class="menu-details">
+            <h3>Latte</h3>
+            <p>Espresso with steamed milk and light foam</p>
+            <div class="price">$5.00</div>
+          </div>
+        </div>
+        <div class="menu-item" onclick="openSidebar('Macchiato', '/image/espresso.jpg', 'Macchiato', 'Espresso marked with a dash of steamed milk', '$4.75')">
+          <div class="menu-img"><img src="/image/macchiato.jpg" ></div>
+          <div class="menu-details">
+            <h3>Macchiato</h3>
+            <p>Espresso "marked" with a dash of steamed milk</p>
+            <div class="price">$4.75</div>
+          </div>
+        </div>
+        <div class="menu-item" onclick="openSidebar('Mocha', '/image/mocha.jpg', 'Mocha', 'Espresso with chocolate and steamed milk', '$5.25')">
+          <div class="menu-img"><img src="/image/mocha.jpg" ></div>
+          <div class="menu-details">
+            <h3>Mocha</h3>
+            <p>Espresso with chocolate and steamed milk</p>
+            <div class="price">$5.25</div>
+          </div>
+        </div>
+        <div class="menu-item" onclick="openSidebar('Americano', '/image/americano.jpg', 'Americano', 'Espresso with hot water for a milder taste', '$3.75')">
+          <div class="menu-img"><img src="/image/americano.jpg" ></div>
+          <div class="menu-details">
+            <h3>Americano</h3>
+            <p>Espresso with hot water for a milder taste</p>
+            <div class="price">$3.75</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section testimonials" id="testimonials">
+      <div class="section-title">
+        <h2>Customer Reviews</h2>
+      </div>
+      <div class="testimonial-grid">
+        <div class="testimonial">
+          <p class="quote">
+            "The best coffee in town! The atmosphere is perfect for working and
+            the staff is incredibly friendly."
+          </p>
+          <div class="customer">
+            <div class="avatar">JD</div>
+            <div>
+              <h4>John Doe</h4>
+              <p>Regular Customer</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial">
+          <p class="quote">
+            "Their seasonal drinks are always a surprise and never disappoint.
+            The caramel macchiato is my go-to order."
+          </p>
+          <div class="customer">
+            <div class="avatar">JS</div>
+            <div>
+              <h4>Jane Smith</h4>
+              <p>Local Artist</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial">
+          <p class="quote">
+            "Perfect spot for meetings. Great coffee, comfortable seating, and
+            fast WiFi. Highly recommended!"
+          </p>
+          <div class="customer">
+            <div class="avatar">MR</div>
+            <div>
+              <h4>Mike Ross</h4>
+              <p>Business Owner</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+      <div class="section-title">
+        <h2>Contact Us</h2>
+      </div>
+      <div class="contact-container">
+        <div class="contact-info">
+          <h3>Get In Touch</h3>
+          <p>📍 123 Coffee Street, Brew City</p>
+          <p>📞 (123) 456-7890</p>
+          <p>✉️ info@brewcafe.com</p>
+          <p>🕒 Mon-Fri: 7am - 8pm</p>
+          <p>🕒 Sat-Sun: 8am - 9pm</p>
+        </div>
+        <div class="contact-form">
+          <form action="">
+            <h3>Send a Message</h3>
+          <input type="text" placeholder="Your Name" required />
+          <input type="email" placeholder="Your Email" required />
+          <textarea placeholder="Your Message" required></textarea>
+          <input type="submit" value="Send Message" class="btn-primary">
+          <!-- <in class="btn btn-primary">Send Message</in> -->
+          </form>
+        </div>
+      </div>
+    </section>
+    <aside class="sidebar" id="customization-sidebar">
+        <button class="close-btn" onclick="closeSidebar()">&times;</button>
+        <div class="sidebar-header">
+            <img id="sidebar-img" src="" alt="">
+            <h2 id="sidebar-title"></h2>
+            <p id="sidebar-desc"></p>
+            <div id="sidebar-price" class="price"></div>
+        </div>
+        <div class="customize-section">
+            <h3>How would you like your coffee?</h3>
+            
+            <div class="option-group">
+                <label>Size</label>
+                <select id="size-option">
+                    <option value="small">Small (1 oz)</option>
+                    <option value="regular" selected>Regular (2 oz)</option>
+                    <option value="large">Large (3 oz)</option>
+                </select>
+            </div>
+            
+            <div class="option-group">
+                <label>Milk</label>
+                <select id="milk-option">
+                    <option value="none">No Milk</option>
+                    <option value="whole">Whole Milk</option>
+                    <option value="2%">2% Milk</option>
+                    <option value="oat">Oat Milk</option>
+                    <option value="almond">Almond Milk</option>
+                </select>
+            </div>
+            
+            <div class="option-group">
+                <label>Sweetener</label>
+                <select id="sweetener-option">
+                    <option value="none">No Sweetener</option>
+                    <option value="sugar">Sugar</option>
+                    <option value="artificial">Artificial Sweetener</option>
+                    <option value="honey">Honey</option>
+                </select>
+            </div>
+            <div class="option-group">
+                <label>Sweetener</label>
+                <input type="number"  value="1" min="1" max="99" maxlength="2" name="" id="" required>
+            </div>
+            
+            <div class="option-group">
+                <label>Temperature</label>
+                <select id="temp-option">
+                    <option value="hot" selected>Hot</option>
+                    <option value="warm">Warm</option>
+                    <option value="iced">Iced</option>
+                </select>
+            </div>
+            
+            <button class="add-to-cart" onclick="addToCart()">Add to Cart</button>
+        </div>
+    </aside>
+    
+    <!-- Overlay for background dimming -->
+    <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Coffee</h3>
+          <p>Making your day better, one cup at a time.</p>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Opening Hours</h3>
+          <ul>
+            <li>Monday-Friday: 7am - 8pm</li>
+            <li>Saturday: 8am - 9pm</li>
+            <li>Sunday: 8am - 7pm</li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Follow Us</h3>
+          <ul>
+            <li>Facebook</li>
+            <li>Instagram</li>
+            <li>Twitter</li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright">© 2025 Brew Café. All rights reserved.</div>
+    </footer>
+    
+      <!-- Your page content here -->
+    
+    <img src="/image/shopping-cart_13882142.png" class="logo-bottom-right" alt="Arabet Tasaw9" onclick="openCart()">
+    
+    <!-- Shopping Cart Modal -->
+    <div id="cartModal" class="cart-modal">
+        <div class="cart-content">
+            <span class="close-cart" onclick="closeCart()">&times;</span>
+            <h2 class="cart-title">🛒 Your Shopping Cart</h2>
+            <div id="cartItems">
+                <!-- Cart items will be displayed here -->
+                <div class="empty-cart">
+                    <i>🛒</i>
+                    <p>Your cart is empty</p>
+                </div>
+            </div>
+            <div class="cart-summary">
+                <div class="total-price">Total: $<span id="totalAmount">0.00</span></div>
+                <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+    <script src="/js/home.js"></script>
+    <script src="/js/sidebar.js"></script>
+  </body>
+</html>
