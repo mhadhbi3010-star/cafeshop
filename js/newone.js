@@ -1,58 +1,27 @@
- function openSidebar(id, imgSrc, title, desc, price) {
-            document.getElementById('sidebar-img').src = imgSrc;
-            
-            document.getElementById('sidebar-title').textContent = title;
-            document.getElementById('sidebar-desc').textContent = desc;
-            document.getElementById('sidebar-price').textContent = price;
-            
-            // Store the item ID for later use
-            document.getElementById('customization-sidebar').dataset.itemId = id;
-            
-            // Show sidebar and overlay
-            document.getElementById('customization-sidebar').classList.add('active');
-            document.getElementById('overlay').classList.add('active');
-        }
-        
-        function closeSidebar() {
-            document.getElementById('customization-sidebar').classList.remove('active');
-            document.getElementById('overlay').classList.remove('active');
-        }
-        
-        // function addToCart() {
-        //     let cart = [];
-        //     const itemId = document.getElementById('customization-sidebar').dataset.itemId;
-        //     const size = document.getElementById('size-option').value;
-        //     const milk = document.getElementById('milk-option').value;
-        //     const sweetener = document.getElementById('sweetener-option').value;
-        //     const temp = document.getElementById('temp-option').value;
-            
-        //     // Example of collecting customization options
-        //     cart.push({
-        //         name: itemId,
-        //         price: 3.50,
-        //         quantity: 1,
-        //         image: "☕"
-        //     });
-            
-        //     // Close sidebar after adding to cart
-        //     closeSidebar();
-            
-        //     // Here you would typically add the item to your cart system
-        //     alert(`Added to cart! Customizations saved.`);
-        // }
-        
-        // // Close sidebar when clicking outside (ESC key)
-        // document.addEventListener('keydown', function(event) {
-        //     if (event.key === 'Escape') {
-        //         closeSidebar();
-        //     }
-        // });
-
-        // // Sample cart data (you can replace this with real data)
-        
-        // addToCart();
-        // Declare cart as a global variable
+// Global cart
 let cart = [];
+
+// Helper function for receipt formatting
+function formatValue(val) {
+    if (!val || val === 'none') return 'None';
+    if (val === '2%') return '2% Milk';
+    return val.charAt(0).toUpperCase() + val.slice(1);
+}
+
+function openSidebar(id, imgSrc, title, desc, price) {
+    document.getElementById('sidebar-img').src = imgSrc;
+    document.getElementById('sidebar-title').textContent = title;
+    document.getElementById('sidebar-desc').textContent = desc;
+    document.getElementById('sidebar-price').textContent = price;
+    document.getElementById('customization-sidebar').dataset.itemId = id;
+    document.getElementById('customization-sidebar').classList.add('active');
+    document.getElementById('overlay').classList.add('active');
+}
+
+function closeSidebar() {
+    document.getElementById('customization-sidebar').classList.remove('active');
+    document.getElementById('overlay').classList.remove('active');
+}
 
 function addToCart() {
     const itemId = document.getElementById('customization-sidebar').dataset.itemId;
@@ -61,12 +30,10 @@ function addToCart() {
     const sweetener = document.getElementById('sweetener-option').value;
     const temp = document.getElementById('temp-option').value;
     
-    // Get item details from the sidebar
     const itemName = document.getElementById('sidebar-title').textContent;
     const itemPrice = parseFloat(document.getElementById('sidebar-price').textContent.replace('$', ''));
     const itemImage = document.getElementById('sidebar-img').src;
     
-    // Create new cart item object with customizations
     const newCartItem = {
         id: itemId,
         name: itemName,
@@ -81,7 +48,6 @@ function addToCart() {
         }
     };
     
-    // Check if item already exists in cart with same customizations
     const existingItemIndex = cart.findIndex(item => 
         item.id === itemId && 
         item.customizations.size === size &&
@@ -91,23 +57,13 @@ function addToCart() {
     );
     
     if (existingItemIndex > -1) {
-        // If item exists with same customizations, increment quantity
         cart[existingItemIndex].quantity += 1;
     } else {
-        // Otherwise add new item to cart
         cart.push(newCartItem);
     }
     
-    console.log('Added to cart:', newCartItem);
-    console.log('Current cart:', cart);
-    
-    // Close sidebar after adding to cart
     closeSidebar();
-    
-    // Update cart display
     updateCartDisplay();
-    
-    // Show confirmation
     alert(`Added to cart! ${itemName} with customizations saved.`);
 }
 
@@ -153,7 +109,7 @@ function updateCartDisplay() {
                         <button class="remove-item" onclick="removeItem(${index})">Remove</button>
                     </div>
                     <div class="item-actions">
-                        <button class="remove-item" onclick="modifieritem(${index})">modifier</button>
+                        <button class="remove-item" onclick="modifieritem(${index})">Modifier</button>
                     </div>
                 </div>
             `;
@@ -171,54 +127,143 @@ function updateCartDisplay() {
         totalAmountSpan.textContent = '0.00';
     }
 }
-        function removeItem(index) {
-            cart.splice(index, 1);
-            updateCartDisplay();
-        }
 
-        function checkout() {
-            if (cart.length === 0) {
-                alert('Your cart is empty!');
-                return;
-            }
-            alert('Proceeding to checkout!');
-            // Add your checkout logic here
-            closeCart();
-        }
+function removeItem(index) {
+    cart.splice(index, 1);
+    updateCartDisplay();
+}
 
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            const modal = document.getElementById('cartModal');
-            if (event.target === modal) {
-                closeCart();
-            }
-        }
+function checkout() {
+    if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+    }
 
-        // Close modal with ESC key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                const modal = document.getElementById('cartModal');
-                if (modal.style.display === 'flex') {
-                    closeCart();
+    let printContent = `
+        <html>
+        <head>
+            <title>Order Receipt</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    padding: 20px;
+                    max-width: 800px;
+                    margin: 0 auto;
+                    background: white;
+                    color: black;
                 }
-            }
-        });
+                h2 {
+                    text-align: center;
+                    color: #2c3e50;
+                }
+                .item {
+                    margin-bottom: 15px;
+                    padding: 10px;
+                    border: 1px solid #eee;
+                    border-radius: 6px;
+                    background: #f9f9f9;
+                }
+                .total {
+                    text-align: right;
+                    font-size: 20px;
+                    font-weight: bold;
+                    margin-top: 20px;
+                    color: black;
+                    border-top: 2px solid #000;
+                    padding-top: 10px;
+                }
+                hr {
+                    margin: 15px 0;
+                }
+            </style>
+        </head>
+        <body>
+            <h2>Order Summary</h2>
+            <hr>
+    `;
 
-    function modifieritem(index) {
+    cart.forEach(item => {
+        printContent += `
+            <div class="item">
+                <h3>${item.name}</h3>
+                <p><strong>Quantity:</strong> ${item.quantity}</p>
+                <p><strong>Size:</strong> ${formatValue(item.customizations.size)}</p>
+                <p><strong>Milk:</strong> ${formatValue(item.customizations.milk)}</p>
+                <p><strong>Sweetener:</strong> ${formatValue(item.customizations.sweetener)}</p>
+                <p><strong>Temperature:</strong> ${formatValue(item.customizations.temperature)}</p>
+                <p><strong>Price:</strong> $${(item.price * item.quantity).toFixed(2)}</p>
+            </div>
+        `;
+    });
+
+    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    printContent += `
+            <div class="total">Total: $${total.toFixed(2)}</div>
+        </body>
+        </html>
+    `;
+
+    const printWin = window.open('', '_blank');
+    printWin.document.open();
+    printWin.document.write(printContent);
+    printWin.document.close();
+
+    printWin.onload = () => {
+        printWin.focus();
+        printWin.print();
+    };
+}
+
+// Close cart modal when clicking outside
+window.onclick = function(event) {
+    const modal = document.getElementById('cartModal');
+    if (event.target === modal) {
+        closeCart();
+    }
+}
+
+// Close modals with Escape key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        const cartModal = document.getElementById('cartModal');
+        if (cartModal.style.display === 'flex') {
+            closeCart();
+        } else {
+            closeModification();
+            closeSidebar();
+        }
+    }
+});
+
+// === MODIFICATION MODAL FUNCTIONS ===
+
+function closeModification() {
+    const modal = document.querySelector('.modification-modal');
+    const overlay = document.querySelector('.modification-overlay');
+    if (modal) modal.remove();
+    if (overlay) overlay.remove();
+}
+
+function modifieritem(index) {
+    // Ensure index is valid
+    if (index < 0 || index >= cart.length) return;
+
+    // Close any existing modal
+    closeModification();
+
     const item = cart[index];
     
-    // Create HTML for modification form
     const modificationHTML = `
         <div style="padding: 15px; font-family: Arial, sans-serif;">
             <h3 style="margin-top: 0; color: #333;">Modifier: ${item.name}</h3>
             
             <div style="margin-bottom: 10px;">
-                <label style="display: block;color: #333; margin-bottom: 5px;">Quantity:</label>
+                <label style="display: block; color: #333; margin-bottom: 5px;">Quantity:</label>
                 <input type="number" id="newQuantity" value="${item.quantity}" min="1" style="width: 80px; padding: 5px; border: 1px solid #ccc; border-radius: 4px;">
             </div>
             
             <div style="margin-bottom: 10px;">
-                <label style="display: block;color: #333; margin-bottom: 5px;">Size:</label>
+                <label style="display: block; color: #333; margin-bottom: 5px;">Size:</label>
                 <select id="newSize" style="padding: 5px; border: 1px solid #ccc; border-radius: 4px;">
                     <option value="small" ${item.customizations.size === 'small' ? 'selected' : ''}>Small</option>
                     <option value="regular" ${item.customizations.size === 'regular' ? 'selected' : ''}>Regular</option>
@@ -227,7 +272,7 @@ function updateCartDisplay() {
             </div>
             
             <div style="margin-bottom: 10px;">
-                <label style="display: block;color: #333; margin-bottom: 5px;">Milk:</label>
+                <label style="display: block; color: #333; margin-bottom: 5px;">Milk:</label>
                 <select id="newMilk" style="padding: 5px; border: 1px solid #ccc; border-radius: 4px;">
                     <option value="none" ${item.customizations.milk === 'none' ? 'selected' : ''}>No Milk</option>
                     <option value="whole" ${item.customizations.milk === 'whole' ? 'selected' : ''}>Whole Milk</option>
@@ -238,7 +283,7 @@ function updateCartDisplay() {
             </div>
             
             <div style="margin-bottom: 10px;">
-                <label  style="display: block;color: #333; margin-bottom: 5px;">Sweetener:</label>
+                <label style="display: block; color: #333; margin-bottom: 5px;">Sweetener:</label>
                 <select id="newSweetener" style="padding: 5px; border: 1px solid #ccc; border-radius: 4px;">
                     <option value="none" ${item.customizations.sweetener === 'none' ? 'selected' : ''}>No Sweetener</option>
                     <option value="sugar" ${item.customizations.sweetener === 'sugar' ? 'selected' : ''}>Sugar</option>
@@ -248,7 +293,7 @@ function updateCartDisplay() {
             </div>
             
             <div style="margin-bottom: 15px;">
-                <label style="display: block;color: #333; margin-bottom: 5px;">Temperature:</label>
+                <label style="display: block; color: #333; margin-bottom: 5px;">Temperature:</label>
                 <select id="newTemp" style="padding: 5px; border: 1px solid #ccc; border-radius: 4px;">
                     <option value="hot" ${item.customizations.temperature === 'hot' ? 'selected' : ''}>Hot</option>
                     <option value="warm" ${item.customizations.temperature === 'warm' ? 'selected' : ''}>Warm</option>
@@ -263,43 +308,68 @@ function updateCartDisplay() {
         </div>
     `;
     
-    // Create a modal for modification
     const modal = document.createElement('div');
+    modal.className = 'modification-modal';
     modal.innerHTML = modificationHTML;
-    modal.style.position = 'fixed';
-    modal.style.top = '50%';
-    modal.style.left = '50%';
-    modal.style.transform = 'translate(-50%, -50%)';
-    modal.style.background = 'white';
-    modal.style.padding = '0';
-    modal.style.border = '2px solid #333';
-    modal.style.borderRadius = '10px';
-    modal.style.zIndex = '3000';
-    modal.style.boxShadow = '0 4px 20px rgba(0,0,0,0.4)';
-    modal.style.maxWidth = '400px';
-    modal.style.width = '90%';
-    modal.style.maxHeight = '90vh';
-    modal.style.overflowY = 'auto';
+    Object.assign(modal.style, {
+        position: 'fixed',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        background: 'white',
+        padding: '0',
+        border: '2px solid #333',
+        borderRadius: '10px',
+        zIndex: '3000',
+        boxShadow: '0 4px 20px rgba(0,0,0,0.4)',
+        maxWidth: '400px',
+        width: '90%',
+        maxHeight: '90vh',
+        overflowY: 'auto'
+    });
     
     const overlay = document.createElement('div');
-    overlay.style.position = 'fixed';
-    overlay.style.top = '0';
-    overlay.style.left = '0';
-    overlay.style.width = '100%';
-    overlay.style.height = '100%';
-    overlay.style.background = 'rgba(0,0,0,0.6)';
-    overlay.style.zIndex = '2999';
+    overlay.className = 'modification-overlay';
+    Object.assign(overlay.style, {
+        position: 'fixed',
+        top: '0',
+        left: '0',
+        width: '100%',
+        height: '100%',
+        background: 'rgba(0,0,0,0.6)',
+        zIndex: '2999'
+    });
     
     document.body.appendChild(overlay);
     document.body.appendChild(modal);
 }
 
 function saveModification(index) {
-    const newQuantity = parseInt(document.getElementById('newQuantity').value);
-    const newSize = document.getElementById('newSize').value;
-    const newMilk = document.getElementById('newMilk').value;
-    const newSweetener = document.getElementById('newSweetener').value;
-    const newTemp = document.getElementById('newTemp').value;
+    // Safety check
+    if (index < 0 || index >= cart.length) {
+        alert('Item no longer exists.');
+        closeModification();
+        return;
+    }
+
+    const newQuantityInput = document.getElementById('newQuantity');
+    const newSizeSelect = document.getElementById('newSize');
+    const newMilkSelect = document.getElementById('newMilk');
+    const newSweetenerSelect = document.getElementById('newSweetener');
+    const newTempSelect = document.getElementById('newTemp');
+
+    // If any element is missing (shouldn't happen with our cleanup), handle gracefully
+    if (!newQuantityInput || !newSizeSelect || !newMilkSelect || !newSweetenerSelect || !newTempSelect) {
+        alert('Error: Modification form not found.');
+        closeModification();
+        return;
+    }
+
+    const newQuantity = parseInt(newQuantityInput.value, 10);
+    const newSize = newSizeSelect.value;
+    const newMilk = newMilkSelect.value;
+    const newSweetener = newSweetenerSelect.value;
+    const newTemp = newTempSelect.value;
     
     if (!isNaN(newQuantity) && newQuantity > 0) {
         cart[index].quantity = newQuantity;
@@ -314,14 +384,4 @@ function saveModification(index) {
     } else {
         alert('Please enter a valid quantity');
     }
-}
-
-function closeModification() {
-    // Remove the modal and overlay
-    const existingModals = document.querySelectorAll('div[style*="position: fixed"]');
-    existingModals.forEach(modal => {
-        if (modal.style.zIndex === '3000' || modal.style.zIndex === '2999') {
-            modal.remove();
-        }
-    });
 }

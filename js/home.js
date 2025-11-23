@@ -1,5 +1,4 @@
 
-       // Smooth scrolling for navigation links
         document.querySelectorAll('nav a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -16,7 +15,6 @@
             });
         });
 
-        // Simple form submission
         const contactForm = document.querySelector('.contact-form');
         if (contactForm) {
             contactForm.addEventListener('submit', function(e) {
@@ -30,3 +28,22 @@
 
        
         }
+
+        let count = 0;
+
+        function addOne() {
+            count += 1;
+            updateCounter();
+        }
+
+        function removeOne() {
+            if (count > 0) {
+                count -= 1;
+            }
+            updateCounter();
+        }
+
+        function updateCounter() {
+            document.getElementById('counter').textContent = count;
+        }
+        

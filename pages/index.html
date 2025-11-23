@@ -35,7 +35,7 @@
           every cup sparks joy.
         </p>
         <div class="btn-group">
-          <a href="#" class="btn btn-primary">Order Now</a>
+          <a href="#menu" class="btn btn-primary">Order Now</a>
           <a href="#contact" class="btn btn-secondary">Contact Us</a>
         </div>
       </div>
@@ -72,7 +72,6 @@
       </div>
     </section>
 
-    <!-- Menu Section -->
     <section class="section menu" id="menu">
       <div class="section-title">
         <h2>Our Menu</h2>
@@ -140,7 +139,6 @@
       </div>
     </section>
 
-    <!-- Testimonials -->
     <section class="section testimonials" id="testimonials">
       <div class="section-title">
         <h2>Customer Reviews</h2>
@@ -188,20 +186,29 @@
       </div>
     </section>
 
-    <!-- Contact Section -->
     <section class="section contact" id="contact">
       <div class="section-title">
         <h2>Contact Us</h2>
       </div>
       <div class="contact-container">
-        <div class="contact-info">
+        <!-- <div class="contact-info">
           <h3>Get In Touch</h3>
           <p>📍 123 Coffee Street, Brew City</p>
           <p>📞 (123) 456-7890</p>
           <p>✉️ info@brewcafe.com</p>
           <p>🕒 Mon-Fri: 7am - 8pm</p>
           <p>🕒 Sat-Sun: 8am - 9pm</p>
-        </div>
+        </div> -->
+        <table class="contact-info">
+          <caption>Get In Touch</caption>
+          <tbody>
+            <tr><td>📍 123 Coffee Street, Brew City</td></tr>
+            <tr><td>📞 (123) 456-7890</td></tr>
+            <tr><td>✉️ info@brewcafe.com</td></tr>
+            <tr><td>🕒 Mon-Fri: 7am - 8pm</td></tr>
+            <tr><td>🕒 Sat-Sun: 8am - 9pm</td></tr>
+          </tbody>
+        </table>
         <div class="contact-form">
           <form action="">
             <h3>Send a Message</h3>
@@ -209,7 +216,6 @@
           <input type="email" placeholder="Your Email" required />
           <textarea placeholder="Your Message" required></textarea>
           <input type="submit" value="Send Message" class="btn-primary">
-          <!-- <in class="btn btn-primary">Send Message</in> -->
           </form>
         </div>
       </div>
@@ -268,15 +274,13 @@
                 </select>
             </div>
             
-            <button class="add-to-cart" onclick="addToCart()">Add to Cart</button>
+            <button class="add-to-cart" onclick="addToCart();addOne()" >Add to Cart</button>
         </div>
     </aside>
     
-    <!-- Overlay for background dimming -->
     <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
 
 
-    <!-- Footer -->
     <footer>
       <div class="footer-content">
         <div class="footer-section">
@@ -312,17 +316,15 @@
       <div class="copyright">© 2025 Brew Café. All rights reserved.</div>
     </footer>
     
-      <!-- Your page content here -->
     
     <img src="/image/shopping-cart_13882142.png" class="logo-bottom-right" alt="Arabet Tasaw9" onclick="openCart()">
+    <div class="counter-circle" id="counter">0</div>
     
-    <!-- Shopping Cart Modal -->
     <div id="cartModal" class="cart-modal">
         <div class="cart-content">
             <span class="close-cart" onclick="closeCart()">&times;</span>
             <h2 class="cart-title">🛒 Your Shopping Cart</h2>
             <div id="cartItems">
-                <!-- Cart items will be displayed here -->
                 <div class="empty-cart">
                     <i>🛒</i>
                     <p>Your cart is empty</p>
@@ -330,11 +332,13 @@
             </div>
             <div class="cart-summary">
                 <div class="total-price">Total: $<span id="totalAmount">0.00</span></div>
-                <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+                <button class="checkout-btn" id="exportToPdf" onclick="checkout()">Proceed to Checkout</button>
             </div>
         </div>
     </div>
     <script src="/js/home.js"></script>
-    <script src="/js/sidebar.js"></script>
+    <!-- <script src="/js/sidebar.js"></script> -->
+    <script src="/js/newone.js"></script>
+  
   </body>
 </html>
