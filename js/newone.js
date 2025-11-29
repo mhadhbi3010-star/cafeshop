@@ -1,7 +1,5 @@
-// Global cart
 let cart = [];
 
-// Helper function for receipt formatting
 function formatValue(val) {
     if (!val || val === 'none') return 'None';
     if (val === '2%') return '2% Milk';
@@ -214,7 +212,6 @@ function checkout() {
     };
 }
 
-// Close cart modal when clicking outside
 window.onclick = function(event) {
     const modal = document.getElementById('cartModal');
     if (event.target === modal) {
@@ -222,7 +219,6 @@ window.onclick = function(event) {
     }
 }
 
-// Close modals with Escape key
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
         const cartModal = document.getElementById('cartModal');
@@ -235,7 +231,6 @@ document.addEventListener('keydown', function(event) {
     }
 });
 
-// === MODIFICATION MODAL FUNCTIONS ===
 
 function closeModification() {
     const modal = document.querySelector('.modification-modal');
@@ -245,10 +240,8 @@ function closeModification() {
 }
 
 function modifieritem(index) {
-    // Ensure index is valid
     if (index < 0 || index >= cart.length) return;
 
-    // Close any existing modal
     closeModification();
 
     const item = cart[index];
@@ -345,7 +338,6 @@ function modifieritem(index) {
 }
 
 function saveModification(index) {
-    // Safety check
     if (index < 0 || index >= cart.length) {
         alert('Item no longer exists.');
         closeModification();
@@ -358,7 +350,6 @@ function saveModification(index) {
     const newSweetenerSelect = document.getElementById('newSweetener');
     const newTempSelect = document.getElementById('newTemp');
 
-    // If any element is missing (shouldn't happen with our cleanup), handle gracefully
     if (!newQuantityInput || !newSizeSelect || !newMilkSelect || !newSweetenerSelect || !newTempSelect) {
         alert('Error: Modification form not found.');
         closeModification();

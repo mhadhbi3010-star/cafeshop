@@ -68,7 +68,6 @@
             color: #FFA000;
         }
 
-        /* Hero Section */
         .hero {
             background: url("/image/31e3b311447496d2f870ee75874ac97a.jpg") no-repeat;
            
@@ -149,7 +148,6 @@
             filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
         }
 
-        /* About Section */
         .section {
             padding: 80px 5%;
         }
@@ -187,8 +185,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
-        /* Menu Section */
-        /* === Tabs Styling – matches your coffee theme === */
+  
 
         .menu {
             background-color: #3E2723;
@@ -241,7 +238,6 @@
             margin: 10px 0;
         }
 
-        /* Testimonials */
         .testimonials {
             background-color: #4E342E;
         }
@@ -281,7 +277,6 @@
             font-weight: bold;
         }
 
-        /* Contact */
         .contact {
             background-color: #3E2723;
         }
@@ -307,29 +302,25 @@
           font-family: inherit;
         }
         
-        /* Style the caption like the original h3 */
         .contact-info caption {
           color: #FFA000;
-          font-size: 1.17em; /* approx h3 size */
+          font-size: 1.17em; 
           font-weight: bold;
           text-align: left;
           margin-bottom: 20px;
           caption-side: top;
         }
         
-        /* Remove default table spacing */
         .contact-info td {
           padding: 0;
           margin: 0;
         }
         
-        /* Mimic paragraph spacing */
         .contact-info tbody tr {
           margin-bottom: 10px;
           display: block;
         }
         
-        /* Optional: reset inheritance if needed */
         .contact-info td {
           line-height: 1.4;
         }
@@ -349,7 +340,6 @@
             height: 150px;
         }
 
-        /* Footer */
         footer {
             background-color: transparent;
             padding: 40px 5% 20px;
@@ -411,12 +401,11 @@
 
 
         }
-        /* little circle */
       .counter-circle {
           width: 14px;
           height: 14px;
           display: flex;
-          background-color: red; /* your accent color */
+          background-color: red; 
           color: white;
           border-radius: 50%;
           display: inline-flex;
@@ -432,7 +421,6 @@
         }
         
 
-        /* Enhanced Shopping Cart Modal */
         .cart-modal {
             display: none;
             position: fixed;
